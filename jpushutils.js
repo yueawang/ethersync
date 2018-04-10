@@ -1,6 +1,10 @@
 var Log = require('./Log');
 var JPush = require("./lib/JPush/JPush.js");
-var client = JPush.buildClient("xxxxxxxxx", "xxxxxxxxx");
+var client = null;
+var ENABLE_JPUSH = false;
+if (ENABLE_JPUSH) {
+    client = JPush.buildClient("xxxxxxxxx", "xxxxxxxxx");
+}
 
 // client.push().setNotification('Hi, JPush') // 设置全局的 alert。
 //
@@ -17,6 +21,9 @@ var client = JPush.buildClient("xxxxxxxxx", "xxxxxxxxx");
 // client.push().setPlatform(JPush.ALL)
 //     .setAudience(JPush.tag('tag1', 'tag2'), JPush.alias('alias1', 'alias2'))
 exports.pushNotification = function(alias, title="", message="", extras=null) {
+    if (client == null) {
+         return;
+    }
     var obj = client.push().setPlatform(JPush.ALL)
         .setNotification(JPush.android(message, title, 1, extras), JPush.ios(message, "sound", 1, true, extras))
     if (alias) {
@@ -35,6 +42,9 @@ exports.pushNotification = function(alias, title="", message="", extras=null) {
 }
 
 exports.pushMessage = function(alias, title="", message="", extras=null) {
+    if (client == null) {
+         return;
+    }
     var obj = client.push().setPlatform(JPush.ALL)
             .setMessage(message, title, "", extras)
     if (alias) {

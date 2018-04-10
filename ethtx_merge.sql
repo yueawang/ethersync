@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `ethblock`(
 		`miner` varchar(66) DEFAULT NULL,
 		`txcount` int(8) NOT NULL,
 		`synced` tinyint NOT NULL DEFAULT 0,
+		`confirmed` tinyint NOT NULL DEFAULT 0,
 		`timestamp` bigint,
 		PRIMARY KEY (`number`)
 	)ENGINE=myisam DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
