@@ -1,13 +1,16 @@
 # README #
 ## What is this repository for? ##
 
-sync and watch ethereum block information to map transactions by address
+sync and watch ethereum block information to map transactions by address<br>
+同步以太坊区块数据并使用mysql建立交易账号系统以支持客户端历史交易记录查询
 
 ## Who do I talk to? ##
+技术支持
 
-* Jivin Shen:jivin.shen@gmail.com
+* YiYa inc:support@yiya.com
 
 ## Setup ##
+环境搭建指南
 ### Setup geth ###
 ```
 sudo add-apt-repository -y ppa:ethereum/ethereum
