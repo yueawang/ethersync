@@ -22,13 +22,15 @@ var PARSE_CONTRACT = false;
 var globalBlockNumber = 0;
 
 //var web3 = new Web3(new Web3.providers.IpcProvider(Config.gethipc, net));
-var web3 = if Config.gethipc.startsWith("http") {
-    new Web3(new Web3.providers.HttpProvider(Config.gethipc, net));
-} else if Config.gethipc.startsWith("ws") {
-    new Web3(new Web3.providers.WebsocketProvider(Config.gethipc, net));
-} else {
-    new Web3(new Web3.providers.IpcProvider(Config.gethipc, net));
-}
+var web3 = function() {
+    if (Config.gethipc.startsWith("http")) {
+        return new Web3(new Web3.providers.HttpProvider(Config.gethipc, net));
+    } else if (Config.gethipc.startsWith("ws")) {
+        return new Web3(new Web3.providers.WebsocketProvider(Config.gethipc, net));
+    } else {
+        return new Web3(new Web3.providers.IpcProvider(Config.gethipc, net));
+    }
+}();
 
 const TRANSACTION_TYPE_DEFAULT  = 0;
 const TRANSACTION_TYPE_CONTRACT = 1;
