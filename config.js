@@ -12,13 +12,23 @@ var configList = {
     },
     test: {
         db: {
-            host: 'test.yiya.io',
+            host: 'localhost',
             user: 'test',
             password: 'yiya',
             database: 'ethdb_test'
         },
         sqlMrgFile:"/data/d01/mysql/ethdb_test/ethtx.MRG",
         gethipc: parentDir + "/geth/data/00/geth.ipc"
+    },
+    infura: {
+        db: {
+            host: 'localhost',
+            user: 'test',
+            password: 'yiya',
+            database: 'ethdb_infura'
+        },
+        sqlMrgFile:"/data/d01/mysql/ethdb_ropsten/ethtx.MRG",
+        gethipc: "wss://ropsten.infura.io/ws/v3/XXXXXXXX",
     },
     ropsten: {
         db: {

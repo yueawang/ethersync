@@ -21,7 +21,14 @@ var DEBUG_COST = false;
 var PARSE_CONTRACT = false;
 var globalBlockNumber = 0;
 
-var web3 = new Web3(new Web3.providers.IpcProvider(Config.gethipc, net));
+//var web3 = new Web3(new Web3.providers.IpcProvider(Config.gethipc, net));
+var web3 = if Config.gethipc.startsWith("http") {
+    new Web3(new Web3.providers.HttpProvider(Config.gethipc, net));
+} else if Config.gethipc.startsWith("ws") {
+    new Web3(new Web3.providers.WebsocketProvider(Config.gethipc, net));
+} else {
+    new Web3(new Web3.providers.IpcProvider(Config.gethipc, net));
+}
 
 const TRANSACTION_TYPE_DEFAULT  = 0;
 const TRANSACTION_TYPE_CONTRACT = 1;
@@ -504,7 +511,7 @@ async function syncFailBlock() {
 var isUpdating = false;
 
 async function confirmTransaction(item) {
-    //Log.log(item.hash)
+    Log.log(item.hash + "confirm")
     const receipt = await web3.eth.getTransactionReceipt(item.hash);
     //Double check whether the transaction is valid
     if (receipt) {
